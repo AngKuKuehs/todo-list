@@ -4,9 +4,13 @@ A simple todo list API that uses Flask and MongoDB.
 # Database Schema
 Collection: Person
 Document:
+```
+{
     _id: str
     title: str
     completed: bool
+}
+```
 
 # Notes
 - MongoDB connection string must be added as an environmental variable before deployment.
