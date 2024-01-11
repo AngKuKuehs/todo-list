@@ -1,9 +1,7 @@
 # todo-list
 A simple todo list API that uses Flask and MongoDB.
 
-# Database Schema
-Collection: Person
-Document:
+# Document Schema
 ```
 {
     _id: str
