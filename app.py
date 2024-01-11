@@ -1,4 +1,3 @@
-# import socket
 import os
 from dotenv import load_dotenv
 
@@ -81,8 +80,4 @@ def remove_reminder():
 
 
 if __name__ == "__main__":
-    # sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # sock.bind(('localhost', 8080))
-    # port = sock.getsockname()[1]
-    # sock.close()
     app.run()
