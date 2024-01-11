@@ -18,7 +18,7 @@ Gets all exisitng reminders.
 Given an id, returns the corresponding reminder.
 
 ## /add
-Given a title, adds a reminder to the collection and returns the ObjectId.
+Given a title, adds a reminder to the collection and returns the value of `_id`.
 
 ## /update
 Given an id and a title and/or completion status, updates the corresponding reminder.
