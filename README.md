@@ -4,7 +4,7 @@ A simple todo list CRUD API that uses Flask and MongoDB Atlas. This project also
 # Document Schema
 ```
 {
-    _id: str
+    _id: ObjectId
     title: str
     completed: bool
 }
