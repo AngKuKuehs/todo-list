@@ -18,12 +18,12 @@ Gets all exisitng reminders.
 Given an id, returns the corresponding reminder.
 
 ## /add
-Given a title, adds a reminder to the collection.
+Given a title, adds a reminder to the collection and returns the ObjectId.
 
 ## /update
 Given an id and a title and/or completion status, updates the corresponding reminder.
 
-## remove
+## /remove
 Given an id, removes the corresponding reminder in the collection.
 
 # Deploying
