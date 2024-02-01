@@ -18,6 +18,13 @@ def default_route():
 
 @app.route('/get-all', methods=['GET'])
 def get_all_reminders():
+    """Gets all tasks.
+
+    Returns
+    -------
+    dict
+        Details of all tasks.
+    """
     db = client.todolist
     reminders_collection = db.reminders_test
     cursor = reminders_collection.find()
@@ -29,6 +36,18 @@ def get_all_reminders():
 
 @app.route('/get-one', methods=['GET'])
 def get_one_reminder():
+    """Gets a task.
+
+    Query Parameter
+    ----------
+    oid: str
+        Task _id
+
+    Returns
+    -------
+    dict
+        Details of task.
+    """
     oid = request.args.get('oid')
     db = client.todolist
     reminders_collection = db.reminders_test
@@ -38,30 +57,55 @@ def get_one_reminder():
 
 @app.route('/add', methods=['POST'])
 def add_reminder():
+    """Adds a task.
+
+    Request Body
+    ----------
+    application/json
+        JSON object with task fields:
+            "title": str
+            "completed": bool
+
+    Returns
+    -------
+    str
+        Number of documents inserted.
+    """
     db = client.todolist
     reminders_collection = db.reminders_test
-    title = request.args.get('title')
-    new_reminder = {
-        "title": title,
-        "completed": False
-    }
-    result = reminders_collection.insert_one(new_reminder)
-    return f"_id of inserted document: {result.inserted_id}"
+    new_reminder = request.get_json()
+    new_reminder = dict(new_reminder)
+
+    if "title" in new_reminder and "completed" in new_reminder:
+        result = reminders_collection.insert_one(new_reminder)
+        return f"_id of inserted document: {result.inserted_id}"
+    return f"missing \"title\" or \"completed\""
 
 @app.route('/update', methods=['PUT'])
 def edit_reminder():
+    """Updates a task.
+
+    Query Parameters
+    ----------
+    oid: str
+        id_ of task to update.
+
+    Request Body
+    ----------
+    application/json
+        JSON object with fields (keys) to update and corresponding update values.
+
+    Returns
+    -------
+    str
+        Number of documents updated.
+    """
     db = client.todolist
     reminders_collection = db.reminders_test
     oid = request.args.get('oid')
-    title = request.args.get('title')
-    completed = request.args.get('completed')
 
     reminder_to_update = {"_id": ObjectId(oid)}
-    updates = {}
-    if title:
-        updates["title"] = title
-    if completed != None:
-        updates["completed"] = completed
+    updates = request.get_json()
     
     result = reminders_collection.update_one(reminder_to_update, {"$set": updates})
 
@@ -70,6 +114,18 @@ def edit_reminder():
 
 @app.route('/remove', methods=['DELETE'])
 def remove_reminder():
+    """Deletes a task.
+
+    Query Parameters
+    ----------
+    oid: str
+        id_ of task to delete.
+
+    Returns
+    -------
+    str
+        Number of documents deleted.
+    """
     db = client.todolist
     reminders_collection = db.reminders_test
     oid = request.args.get('oid')
