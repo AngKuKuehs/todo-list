@@ -18,10 +18,10 @@ Gets all exisitng reminders.
 Given an id, returns the corresponding reminder.
 
 ## /add
-Given a title, adds a reminder to the collection and returns the value of `_id`.
+Given the id as a query parameter and a JSON HTTP request body formatted according to the Document Schema (w/o a _id), adds a reminder to the collection and returns the value of `_id`.
 
 ## /update
-Given an id and a title and/or completion status, updates the corresponding reminder.
+Given the id as a query parameter and a JSON HTTP request body formatted according to the Document Schema (w/o a _id), updates the reminderand returns confirmation of the update.
 
 ## /remove
 Given an id, removes the corresponding reminder in the collection.
